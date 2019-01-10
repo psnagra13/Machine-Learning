@@ -51,6 +51,8 @@ print (X[:, 0])
 onehotencoder = OneHotEncoder(categorical_features = [0])
 X = onehotencoder.fit_transform(X).toarray()
 
+# Avoiding the Dummy Variable Trap
+X = X[:, 1:]
 
 
 # Encoding the Dependent Variable
