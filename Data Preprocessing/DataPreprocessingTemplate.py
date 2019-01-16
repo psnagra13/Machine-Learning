@@ -19,23 +19,16 @@ y = dataset.iloc[:, 3].values
 
 #  HANDLING MISSING DATA ######################################################################################################################
 
-from sklearn.impute import SimpleImputer
-'''
-    SimpleImputer(missing_values = , stratergy = , fill_value = , verbose=0, )
+cols = dataset.columns
+print ("Missing entries in columns : ")
+for col in cols:
+    missing_entries = dataset[col].isnull().sum()
+    if missing_entries > 0:
+        print (col)
+dataset['Age']=dataset['Age'].fillna(dataset['Age']).median()       
+        
+        
 
-            missing_values = The placeholder for the missing values. All occurrences of missing_values will be imputed.
-            stratergy =  mean, median, most_frequent, constant
-            fill_value =  When strategy == constant, fill_value is used to replace all occurrences of missing_values. 
-'''
-imputer = SimpleImputer(missing_values=np.nan, strategy='mean')
-# handling missing data for coloumn = 1
-imputer = imputer.fit(X[:, [1]])
-X[:, [1]] = imputer.transform(X[:, [1]])
-
-# handling missing data for coloumns = 1,2 together
-imputer3 = SimpleImputer(missing_values=np.nan, strategy='median')
-imputer3 = imputer3.fit(X[:, 1:3])
-X[:, 1:3] = imputer3.transform(X[:, 1:3])
 
 print (X)
 
